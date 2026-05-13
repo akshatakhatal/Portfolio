@@ -6,6 +6,7 @@ const themeIcon = document.querySelector('.theme-icon');
 const scrollTopButton = document.querySelector('.scroll-top');
 const form = document.getElementById('contact-form');
 const year = document.getElementById('year');
+const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/your-form-id';
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -111,7 +112,7 @@ function typeEffect() {
 setTimeout(typeEffect, 350);
 
 if (form) {
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const name = document.getElementById('name');
@@ -146,9 +147,43 @@ if (form) {
       isValid = false;
     }
 
-    if (isValid) {
-      formStatus.textContent = 'Thank you. Your message has been validated successfully.';
+    if (!isValid) {
+      return;
+    }
+
+    if (CONTACT_FORM_ENDPOINT.includes('your-form-id')) {
+      formStatus.textContent = 'Add your Formspree form ID in script.js to activate email delivery.';
+      return;
+    }
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) submitButton.disabled = true;
+    formStatus.textContent = 'Sending your message...';
+
+    try {
+      const response = await fetch(CONTACT_FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.value.trim(),
+          email: email.value.trim(),
+          message: message.value.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Request failed');
+      }
+
+      formStatus.textContent = 'Thanks! Your message has been sent successfully.';
       form.reset();
+    } catch (error) {
+      formStatus.textContent = 'Something went wrong while sending. Please try again.';
+    } finally {
+      if (submitButton) submitButton.disabled = false;
     }
   });
 }
