@@ -1,12 +1,9 @@
 ﻿const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const navItems = document.querySelectorAll('.nav-links a');
-const themeToggle = document.querySelector('.theme-toggle');
-const themeIcon = document.querySelector('.theme-icon');
 const scrollTopButton = document.querySelector('.scroll-top');
 const form = document.getElementById('contact-form');
 const year = document.getElementById('year');
-const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/your-form-id';
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -25,21 +22,6 @@ if (menuToggle && navLinks) {
       menuToggle.setAttribute('aria-expanded', 'false');
       menuToggle.setAttribute('aria-label', 'Open menu');
     });
-  });
-}
-
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
-  document.body.classList.add('light-theme');
-  if (themeIcon) themeIcon.textContent = '🌙';
-}
-
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('light-theme');
-    const isLight = document.body.classList.contains('light-theme');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    if (themeIcon) themeIcon.textContent = isLight ? '🌙' : '☀';
   });
 }
 
@@ -64,17 +46,19 @@ if ('IntersectionObserver' in window) {
   revealElements.forEach((el) => el.classList.add('visible'));
 }
 
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 400) {
-    scrollTopButton.classList.add('show');
-  } else {
-    scrollTopButton.classList.remove('show');
-  }
-});
+if (scrollTopButton) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      scrollTopButton.classList.add('show');
+    } else {
+      scrollTopButton.classList.remove('show');
+    }
+  });
 
-scrollTopButton.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+  scrollTopButton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 const typingText = document.getElementById('typing-text');
 const typingWords = ['responsive websites', 'clean UI systems', 'interactive experiences'];
@@ -151,27 +135,35 @@ if (form) {
       return;
     }
 
-    if (CONTACT_FORM_ENDPOINT.includes('your-form-id')) {
-      formStatus.textContent = 'Add your Formspree form ID in script.js to activate email delivery.';
+    const endpoint = (form.getAttribute('action') || '').trim();
+    if (!endpoint || endpoint.includes('your-form-id')) {
+      formStatus.textContent = 'Add your real Formspree endpoint in the form action to activate email delivery.';
       return;
     }
 
+    const honeypotField = form.querySelector('input[name="_gotcha"]');
+    if (honeypotField && honeypotField.value.trim()) {
+      formStatus.textContent = 'Thanks! Your message has been sent successfully.';
+      form.reset();
+      return;
+    }
+
+    name.value = name.value.trim();
+    email.value = email.value.trim();
+    message.value = message.value.trim();
+
+    const formData = new FormData(form);
     const submitButton = form.querySelector('button[type="submit"]');
     if (submitButton) submitButton.disabled = true;
     formStatus.textContent = 'Sending your message...';
 
     try {
-      const response = await fetch(CONTACT_FORM_ENDPOINT, {
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({
-          name: name.value.trim(),
-          email: email.value.trim(),
-          message: message.value.trim(),
-        }),
+        body: formData,
       });
 
       if (!response.ok) {

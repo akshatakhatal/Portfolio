@@ -11,19 +11,6 @@
   --glow: 0 0 24px rgba(0, 212, 255, 0.35);
 }
 
-body.light-theme {
-  --bg: #f4f7fc;
-  --bg-alt: #e8eef8;
-  --surface: #ffffff;
-  --text: #111827;
-  --muted: #4b5563;
-  --accent: #0f766e;
-  --accent-strong: #0d5f58;
-  --border: rgba(17, 24, 39, 0.12);
-  --shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-  --glow: 0 0 0 transparent;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -170,16 +157,6 @@ a {
   height: 2px;
   background: var(--text);
   transition: transform 0.3s ease;
-}
-
-.theme-toggle {
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--border);
-  border-radius: 0.55rem;
-  background: var(--surface);
-  color: var(--text);
-  cursor: pointer;
 }
 
 .hero {
@@ -439,6 +416,14 @@ form {
 .form-group {
   display: grid;
   gap: 0.4rem;
+}
+
+.hp-field-wrapper {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 label {

@@ -33,9 +33,6 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
 
-      <button class="theme-toggle" aria-label="Toggle dark and light mode" title="Toggle theme">
-        <span class="theme-icon" aria-hidden="true">☀</span>
-      </button>
     </nav>
   </header>
 
@@ -59,7 +56,7 @@
         <div class="about-content">
           <p>
             I am a front-end developer passionate about crafting digital products that feel intuitive, polished, and purposeful. I enjoy turning ideas into responsive interfaces with strong visual hierarchy and thoughtful interaction design.
-          </p>
+          </p> <br>
           <p>
             My strengths include problem-solving, clean code architecture, and collaboration. I focus on performance, accessibility, and maintainable styling to deliver websites that not only look great but also work reliably across devices.
           </p>
@@ -104,7 +101,7 @@
 
     <section class="credentials section container reveal" id="credentials" aria-labelledby="credentials-heading">
       <h2 id="credentials-heading">Certifications & Internships</h2>
-      <p class="credentials-intro">This section is prepared for upcoming achievements. You can attach certificate links as soon as you complete them.</p>
+      <!-- <p class="credentials-intro">This section is prepared for upcoming achievements. You can attach certificate links as soon as you complete them.</p> -->
 
       <div class="credentials-grid">
         <article class="credential-card">
@@ -115,29 +112,29 @@
           <a href="#" class="credential-link" aria-label="Attach frontend development certificate">Attach Certificate</a>
         </article>
 
-        <article class="credential-card">
+        <!-- <article class="credential-card">
           <p class="credential-tag">Certification</p>
           <h3>JavaScript Advanced Certificate</h3>
           <p class="credential-meta">Issuer: To be added</p>
           <p class="credential-meta">Completion: Planned</p>
           <a href="#" class="credential-link" aria-label="Attach JavaScript advanced certificate">Attach Certificate</a>
-        </article>
+        </article> -->
 
-        <article class="credential-card">
+        <!-- <article class="credential-card">
           <p class="credential-tag">Internship</p>
           <h3>Web Developer Internship</h3>
           <p class="credential-meta">Company: To be added</p>
           <p class="credential-meta">Duration: To be added</p>
           <a href="#" class="credential-link" aria-label="Attach internship completion certificate">Attach Certificate</a>
-        </article>
+        </article> -->
 
-        <article class="credential-card">
+        <!-- <article class="credential-card">
           <p class="credential-tag">Internship</p>
           <h3>Frontend Intern Role</h3>
           <p class="credential-meta">Company: To be added</p>
           <p class="credential-meta">Duration: Planned</p>
           <a href="#" class="credential-link" aria-label="Attach frontend internship certificate">Attach Certificate</a>
-        </article>
+        </article> -->
       </div>
     </section>
 
@@ -146,7 +143,7 @@
       <div class="projects-grid">
         <article class="project-card">
           <h3>Portfolio Website</h3>
-          <p>A clean and responsive personal portfolio with smooth interactions and dark mode.</p>
+          <p>A clean and responsive personal portfolio with smooth interactions.</p>
           <p class="tech">Tech: HTML, CSS, JavaScript</p>
           <div class="project-links">
             <a href="#" aria-label="View live demo of Portfolio Website">Live Demo</a>
@@ -155,27 +152,27 @@
         </article>
 
         <article class="project-card">
-          <h3>Chat-App</h3>
-          <p>A productivity tool to organize tasks with filters, deadlines, and progress states.</p>
-          <p class="tech">Tech: HTML, CSS, JavaScript, Local Storage</p>
+          <h3>Chat-App  (Talkify)</h3>
+          <p>A real-time chat app for fast and seamless communication.</p>
+          <p class="tech">Tech: HTML, CSS, JavaScript</p>
           <div class="project-links">
             <a target ="_blank" href= "https://talkify-j71b.onrender.com/">Live Demo</a>
             <a target ="_blank" href= "https://github.com/akshatakhatal/Talkify">GitHub</a>
           </div>
         </article>
 
-        <article class="project-card">
-          <h3>Weather Dashboard</h3>
+        <!-- <article class="project-card">
+          <h3>Spotify Clone</h3>
           <p>A weather app fetching real-time forecast data with location-based search.</p>
           <p class="tech">Tech: HTML, CSS, JavaScript, Weather API</p>
           <div class="project-links">
             <a href="#" aria-label="View live demo of Weather Dashboard">Live Demo</a>
             <a href="#" aria-label="View GitHub repository of Weather Dashboard">GitHub</a>
           </div>
-        </article>
+        </article> -->
 
         <article class="project-card">
-          <h3>E-commerce UI</h3>
+          <h3>Clothing Brand Website</h3>
           <p>A modern storefront interface focused on product discovery and usability.</p>
           <p class="tech">Tech: HTML, CSS, JavaScript</p>
           <div class="project-links">
@@ -183,6 +180,18 @@
             <a target ="_blank" href ="View GitHub repository of E-commerce UI">GitHub</a>
           </div>
         </article>
+
+        <!-- <article class="project-card">
+          <h3>Netflix Clone</h3>
+          <p>A weather app fetching real-time forecast data with location-based search.</p>
+          <p class="tech">Tech: HTML, CSS, JavaScript, Weather API</p>
+          <div class="project-links">
+            <a href="#" aria-label="View live demo of Weather Dashboard">Live Demo</a>
+            <a href="#" aria-label="View GitHub repository of Weather Dashboard">GitHub</a>
+          </div>
+        </article> -->
+
+        
       </div>
     </section>
 
@@ -199,7 +208,12 @@ Q      </div>
 
     <section class="contact section container reveal" id="contact" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Contact</h2>
-      <form id="contact-form" novalidate>
+      <form
+        id="contact-form"
+        action="https://formspree.io/f/xjgzybpo"
+        method="POST"
+        novalidate
+      >
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" aria-required="true" required />
@@ -217,6 +231,13 @@ Q      </div>
           <textarea id="message" name="message" rows="6" aria-required="true" required></textarea>
           <small class="error" id="message-error"></small>
         </div>
+
+        <div class="hp-field-wrapper" aria-hidden="true">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <input type="hidden" name="_subject" value="New Portfolio Contact Message" />
 
         <button type="submit" class="btn btn-primary">Send Message</button>
         <p id="form-status" class="form-status" aria-live="polite"></p>
